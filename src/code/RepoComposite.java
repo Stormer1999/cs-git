@@ -1,36 +1,22 @@
 package code;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class RepoComposite implements Prototype {
+public class RepoComposite implements RepoComponent {
 
-  int commitId;
+  public ArrayList<RepoComponent> commitList;
 
-  List<String> changes;
-
-  String parentId;
-
-  String childId;
-
-  public Commit commits = new Commit();
-
-  public ArrayList<RepoComposite> commitList;
+  String bName;
 
   public RepoComposite(String bName) {
-    commits = new Commit();
     commitList = new ArrayList<>();
-  }
-
-  public RepoComposite(int commitId, List<String> changes) {
-    this.commitId = commitId;
-    this.changes = changes;
-    this.parentId = null;
-    this.childId = null;
+    this.bName = bName;
   }
 
   public List<String> viewChanges() {
-    return this.changes;
+    return Collections.emptyList();
   }
 
   public String getParent() {
@@ -42,45 +28,15 @@ public class RepoComposite implements Prototype {
   }
 
   @Override
-  public String toString() {
-    return "RepoComposite{"
-        + "commitId="
-        + commitId
-        + ", changes="
-        + changes
-        + ", patentId='"
-        + parentId
-        + '\''
-        + ", childId='"
-        + childId
-        + '\'';
-  }
-
-  void printAllCommit() {
-    int count = 1;
-    for (RepoComposite r : commits) {
-      System.out.println("dept: " + count + " " + r.toString());
-      count++;
+  public void printCommit() {
+    System.out.println("branch: " + bName);
+    for (RepoComponent child : commitList) {
+      child.printCommit();
     }
-  } // print all data
-
-  void reId(int num) {
-    this.commitId = num;
-    commits.reIdAll(num);
   }
 
   @Override
-  public Prototype clonePrototype(String bName) {
-    RepoComposite branchNew = new RepoComposite(bName);
-    branchNew.commitId = commitId;
-    branchNew.changes = changes;
-    branchNew.parentId = parentId;
-    branchNew.childId = childId;
-    branchNew.commits = commits;
-    return branchNew;
-  }
-
-  public void add(RepoComposite child) {
+  public void addCommit(RepoComponent child) {
     commitList.add(child);
   }
 }

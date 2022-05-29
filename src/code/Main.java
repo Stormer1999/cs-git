@@ -10,42 +10,15 @@ public class Main {
     changes.add("hi.java");
     changes.add("welcome.java");
 
-    //    RepoService service = new RepoService(new RepoComposite("master"));
-    //    service.addCommit(changes);
-    //    changes.add("home.js");
-    //    service.addCommit(changes);
-    //    service.printAll();
-    //    changes.add("Discord.js");
-    //    service.addCommit(changes);
-    //    service.printAll();
+    Commit c1 = new Commit(0, changes, null, null);
+    RepoComponent repo1 = new RepoComposite("master");
+    repo1.addCommit(c1);
+    repo1.printCommit();
 
-    //    service.changeId(3);
-    //    System.out.println("After re-id");
-    //    service.printAll("master");
-
-    //    service.extractBranch("dev");
-
-    System.out.println("new zone");
-    RepoComposite repoComposite = new RepoComposite("master");
-//    repoComposite.commits.add(new RepoComposite(0, changes));
-    repoComposite.add(new RepoComposite(0, changes));
-    changes.add("DiscordX1.js");
-//    repoComposite.commits.add(new RepoComposite(0, changes));
-    repoComposite.add(new RepoComposite(0, changes));
-    repoComposite.printAllCommit();
-
-    //    repoComposite.clonePrototype("dev");
-
-    //    RepoComposite repoComposite2 = new RepoComposite("dev");
-    //    repoComposite2.commits.add(new RepoComposite(0, changes));
-    //    repoComposite2.printAllCommit();
-    
-//    extractBranch("dev");
-  }
-
-  static void extractBranch(String bName) {
-    RepoComposite repoComposite = new RepoComposite(bName);
-    repoComposite.clonePrototype(bName);
-    repoComposite.printAllCommit();
+    System.out.println("add new commit");
+    changes.add("index.html.java");
+    Commit c2 = new Commit(1, changes, null, null);
+    repo1.addCommit(c2);
+    repo1.printCommit();
   }
 }
