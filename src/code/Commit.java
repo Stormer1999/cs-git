@@ -1,6 +1,5 @@
 package code;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Commit implements RepoComponent {
@@ -23,8 +22,13 @@ public class Commit implements RepoComponent {
   }
 
   @Override
-  public List<String> viewChanges() {
-    return Collections.emptyList();
+  public String viewChanges() {
+    StringBuilder sb = new StringBuilder();
+    for (String str : changes) {
+      sb.append(str).append(", ");
+    }
+    sb.deleteCharAt(sb.length()-2);
+    return sb.toString();
   }
 
   @Override

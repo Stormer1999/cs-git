@@ -1,7 +1,6 @@
 package code;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RepoComposite implements RepoComponent {
@@ -15,8 +14,13 @@ public class RepoComposite implements RepoComponent {
     this.bName = bName;
   }
 
-  public List<String> viewChanges() {
-    return Collections.emptyList();
+  public String viewChanges() {
+    if (commitList.isEmpty()) {
+      System.out.println("error cause commit is empty");
+      return null;
+    }
+    List<RepoComponent> child = new ArrayList<>(commitList);
+    return child.get(child.size() - 1).viewChanges();
   }
 
   public String getParent() {

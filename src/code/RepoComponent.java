@@ -1,10 +1,8 @@
 package code;
 
-import java.util.List;
-
 public interface RepoComponent {
 
-  List<String> viewChanges();
+  String viewChanges();
 
   String getParent();
 
@@ -13,4 +11,5 @@ public interface RepoComponent {
   void printCommit();
 
   void addCommit(RepoComponent child);
+
 }

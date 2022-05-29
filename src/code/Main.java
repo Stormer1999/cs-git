@@ -14,11 +14,14 @@ public class Main {
     RepoComponent repo1 = new RepoComposite("master");
     repo1.addCommit(c1);
     repo1.printCommit();
+    System.out.println("changes in head commit = " + repo1.viewChanges());
+
 
     System.out.println("add new commit");
     changes.add("index.html.java");
     Commit c2 = new Commit(1, changes, null, null);
     repo1.addCommit(c2);
     repo1.printCommit();
+    System.out.println("changes in head commit = " + repo1.viewChanges());
   }
 }
