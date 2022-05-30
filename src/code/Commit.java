@@ -1,16 +1,17 @@
 package code;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Commit implements RepoComponent {
 
-  int commitId;
+  private int commitId;
 
-  List<String> changes;
+  private List<String> changes;
 
-  String parentId;
+  private String parentId;
 
-  String childId;
+  private String childId;
 
   public Commit() {}
 
@@ -23,11 +24,15 @@ public class Commit implements RepoComponent {
 
   @Override
   public String viewChanges() {
+    if (changes.isEmpty()) {
+      System.out.println("*** error changes is empty ***");
+      return null;
+    }
     StringBuilder sb = new StringBuilder();
     for (String str : changes) {
       sb.append(str).append(", ");
     }
-    sb.deleteCharAt(sb.length()-2);
+    sb.deleteCharAt(sb.length() - 2);
     return sb.toString();
   }
 
@@ -44,7 +49,7 @@ public class Commit implements RepoComponent {
   @Override
   public void printCommit() {
     System.out.println(
-        "\tRepoComposite {"
+        "\t"
             + " commitId="
             + commitId
             + ", changes="
@@ -54,10 +59,24 @@ public class Commit implements RepoComponent {
             + '\''
             + ", childId='"
             + childId
-            + '\''
-            + " }");
+            + '\'');
   }
 
   @Override
   public void addCommit(RepoComponent child) {}
+
+  @Override
+  public RepoComponent clonePrototype(String bName, RepoComponent oldCommit) {
+    Commit commit = new Commit();
+    commit.commitId = commitId;
+    commit.changes = changes;
+    commit.parentId = parentId;
+    commit.childId = childId;
+    return commit;
+  }
+
+  @Override
+  public List<RepoComponent> getCommits() {
+    return null;
+  }
 }

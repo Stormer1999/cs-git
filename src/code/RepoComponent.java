@@ -1,5 +1,7 @@
 package code;
 
+import java.util.List;
+
 public interface RepoComponent {
 
   String viewChanges();
@@ -12,4 +14,7 @@ public interface RepoComponent {
 
   void addCommit(RepoComponent child);
 
+  RepoComponent clonePrototype(String bName, RepoComponent oldCommit);
+
+  List<RepoComponent> getCommits();
 }
