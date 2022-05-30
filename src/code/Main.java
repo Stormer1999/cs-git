@@ -10,42 +10,40 @@ public class Main {
     changes.add("hi.java");
     changes.add("welcome.java");
 
-    //    RepoService service = new RepoService(new RepoComposite("master"));
-    //    service.addCommit(changes);
-    //    changes.add("home.js");
-    //    service.addCommit(changes);
-    //    service.printAll();
-    //    changes.add("Discord.js");
-    //    service.addCommit(changes);
-    //    service.printAll();
+    // add commit1 in master
+    System.out.println("\n### add new commit ###");
+    RepoComponent repo1 = new RepoComposite("master");
+    repo1.addCommit(new Commit(0, changes, null, null));
+    repo1.printCommit();
+    System.out.println("changes in head commit = " + repo1.viewChanges());
 
-    //    service.changeId(3);
-    //    System.out.println("After re-id");
-    //    service.printAll("master");
+    // add commit2 in master
+    System.out.println("\n### add new commit ###");
+    List<String> changes2 = new ArrayList<>();
+    changes2.add("hello.java");
+    changes2.add("hi.java");
+    repo1.addCommit(new Commit(1, changes2, null, null));
+    repo1.printCommit();
+    System.out.println("changes in head commit = " + repo1.viewChanges());
 
-    //    service.extractBranch("dev");
+    // extract branch
+    System.out.println("\n### extract branch ###");
+    RepoComponent repo2 = repo1.clonePrototype("b_new", repo1);
+    repo2.printCommit();
 
-    System.out.println("new zone");
-    RepoComposite repoComposite = new RepoComposite("master");
-//    repoComposite.commits.add(new RepoComposite(0, changes));
-    repoComposite.add(new RepoComposite(0, changes));
-    changes.add("DiscordX1.js");
-//    repoComposite.commits.add(new RepoComposite(0, changes));
-    repoComposite.add(new RepoComposite(0, changes));
-    repoComposite.printAllCommit();
+    // add commit 3 in new branch
+    System.out.println("\n### add commit to new branch ###");
+    repo2.addCommit(new Commit(2, changes, null, null));
+    repo2.printCommit();
 
-    //    repoComposite.clonePrototype("dev");
+    // print all branch
+    System.out.println("\n### all branch ###");
+    repo1.printCommit();
+    repo2.printCommit();
 
-    //    RepoComposite repoComposite2 = new RepoComposite("dev");
-    //    repoComposite2.commits.add(new RepoComposite(0, changes));
-    //    repoComposite2.printAllCommit();
-    
-//    extractBranch("dev");
-  }
-
-  static void extractBranch(String bName) {
-    RepoComposite repoComposite = new RepoComposite(bName);
-    repoComposite.clonePrototype(bName);
-    repoComposite.printAllCommit();
+    // view head commit
+    System.out.println("\n### changed files in head commit ###");
+    System.out.println(repo1.getBName() + ": " + repo1.viewChanges());
+    System.out.println(repo2.getBName() + ": " + repo2.viewChanges());
   }
 }

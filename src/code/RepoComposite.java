@@ -3,84 +3,68 @@ package code;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoComposite implements Prototype {
+public class RepoComposite implements RepoComponent {
 
-  int commitId;
+  private List<RepoComponent> commitList;
 
-  List<String> changes;
+  private String bName;
 
-  String parentId;
-
-  String childId;
-
-  public Commit commits = new Commit();
-
-  public ArrayList<RepoComposite> commitList;
+  public RepoComposite() {}
 
   public RepoComposite(String bName) {
-    commits = new Commit();
     commitList = new ArrayList<>();
+    this.bName = bName;
   }
 
-  public RepoComposite(int commitId, List<String> changes) {
-    this.commitId = commitId;
-    this.changes = changes;
-    this.parentId = null;
-    this.childId = null;
-  }
-
-  public List<String> viewChanges() {
-    return this.changes;
-  }
-
-  public String getParent() {
-    return null;
-  }
-
-  public String getChild() {
-    return null;
-  }
-
-  @Override
-  public String toString() {
-    return "RepoComposite{"
-        + "commitId="
-        + commitId
-        + ", changes="
-        + changes
-        + ", patentId='"
-        + parentId
-        + '\''
-        + ", childId='"
-        + childId
-        + '\'';
-  }
-
-  void printAllCommit() {
-    int count = 1;
-    for (RepoComposite r : commits) {
-      System.out.println("dept: " + count + " " + r.toString());
-      count++;
+  public String viewChanges() {
+    if (commitList.isEmpty()) {
+      System.out.println("*** error cause commit is empty ***");
+      return null;
     }
-  } // print all data
-
-  void reId(int num) {
-    this.commitId = num;
-    commits.reIdAll(num);
+    List<RepoComponent> child = new ArrayList<>(commitList);
+    return child.get(child.size() - 1).viewChanges();
   }
 
   @Override
-  public Prototype clonePrototype(String bName) {
-    RepoComposite branchNew = new RepoComposite(bName);
-    branchNew.commitId = commitId;
-    branchNew.changes = changes;
-    branchNew.parentId = parentId;
-    branchNew.childId = childId;
-    branchNew.commits = commits;
-    return branchNew;
+  public void printCommit() {
+    System.out.println("branch: *" + bName);
+    if (commitList == null) {
+      System.out.println("*** error printCommit cause commit is empty ***");
+      return;
+    }
+    // print all child
+    for (RepoComponent child : commitList) {
+      child.printCommit();
+    }
   }
 
-  public void add(RepoComposite child) {
+  @Override
+  public void addCommit(RepoComponent child) {
     commitList.add(child);
+    // TODO: pair relation when add newer commit (update parent & child)
+  }
+
+  @Override
+  public RepoComponent clonePrototype(String bName, RepoComponent oldCommit) {
+    // TODO: if not found branch
+    List<RepoComponent> list = new ArrayList<>();
+    // clone all child
+    for (RepoComponent child : commitList) {
+      list.add(child.getCommit());
+    }
+    // create new object to store cloned-child and return them
+    RepoComposite repo = new RepoComposite(bName);
+    repo.commitList = list;
+    return repo;
+  }
+
+  @Override
+  public Commit getCommit() {
+    return null;
+  }
+
+  @Override
+  public String getBName() {
+    return this.bName;
   }
 }
