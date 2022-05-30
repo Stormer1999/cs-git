@@ -25,14 +25,6 @@ public class RepoComposite implements RepoComponent {
     return child.get(child.size() - 1).viewChanges();
   }
 
-  public String getParent() {
-    return null;
-  }
-
-  public String getChild() {
-    return null;
-  }
-
   @Override
   public void printCommit() {
     System.out.println("branch: *" + bName);
@@ -40,6 +32,7 @@ public class RepoComposite implements RepoComponent {
       System.out.println("*** error printCommit cause commit is empty ***");
       return;
     }
+    // print all child
     for (RepoComponent child : commitList) {
       child.printCommit();
     }
@@ -53,19 +46,25 @@ public class RepoComposite implements RepoComponent {
 
   @Override
   public RepoComponent clonePrototype(String bName, RepoComponent oldCommit) {
-    //    List<RepoComponent> repoList = oldCommit.getCommits();
-    //    RepoComposite repo = new RepoComposite();
-    //    repo.bName = bName;
-    //    repo.commitList = repoList;
-    //    return repo;
-    RepoComposite rp = new RepoComposite();
-    rp.bName = bName;
-    rp.commitList = commitList;
-    return rp;
-  } // clone all child (loop)
+    // TODO: if not found branch
+    List<RepoComponent> list = new ArrayList<>();
+    // clone all child
+    for (RepoComponent child : commitList) {
+      list.add(child.getCommit());
+    }
+    // create new object to store cloned-child and return them
+    RepoComposite repo = new RepoComposite(bName);
+    repo.commitList = list;
+    return repo;
+  }
 
   @Override
-  public List<RepoComponent> getCommits() {
-    return this.commitList;
+  public Commit getCommit() {
+    return null;
+  }
+
+  @Override
+  public String getBName() {
+    return this.bName;
   }
 }

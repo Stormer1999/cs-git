@@ -1,14 +1,8 @@
 package code;
 
-import java.util.List;
-
 public interface RepoComponent {
 
   String viewChanges();
-
-  String getParent();
-
-  String getChild();
 
   void printCommit();
 
@@ -16,5 +10,7 @@ public interface RepoComponent {
 
   RepoComponent clonePrototype(String bName, RepoComponent oldCommit);
 
-  List<RepoComponent> getCommits();
+  Commit getCommit();
+
+  String getBName();
 }

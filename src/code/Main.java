@@ -10,7 +10,7 @@ public class Main {
     changes.add("hi.java");
     changes.add("welcome.java");
 
-    //    add commit1 in master
+    // add commit1 in master
     System.out.println("\n### add new commit ###");
     RepoComponent repo1 = new RepoComposite("master");
     repo1.addCommit(new Commit(0, changes, null, null));
@@ -28,15 +28,22 @@ public class Main {
 
     // extract branch
     System.out.println("\n### extract branch ###");
-    RepoComponent repo2 = repo1.clonePrototype("b_new",repo1);
+    RepoComponent repo2 = repo1.clonePrototype("b_new", repo1);
     repo2.printCommit();
 
     // add commit 3 in new branch
-    repo2.addCommit(new Commit(3, changes, null, null));
+    System.out.println("\n### add commit to new branch ###");
+    repo2.addCommit(new Commit(2, changes, null, null));
+    repo2.printCommit();
 
     // print all branch
     System.out.println("\n### all branch ###");
     repo1.printCommit();
     repo2.printCommit();
+
+    // view head commit
+    System.out.println("\n### changed files in head commit ###");
+    System.out.println(repo1.getBName() + ": " + repo1.viewChanges());
+    System.out.println(repo2.getBName() + ": " + repo2.viewChanges());
   }
 }

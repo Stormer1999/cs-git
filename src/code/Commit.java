@@ -1,6 +1,5 @@
 package code;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Commit implements RepoComponent {
@@ -29,21 +28,13 @@ public class Commit implements RepoComponent {
       return null;
     }
     StringBuilder sb = new StringBuilder();
+    // loop all changed files
     for (String str : changes) {
       sb.append(str).append(", ");
     }
+    // delete last comma and space
     sb.deleteCharAt(sb.length() - 2);
     return sb.toString();
-  }
-
-  @Override
-  public String getParent() {
-    return null;
-  }
-
-  @Override
-  public String getChild() {
-    return null;
   }
 
   @Override
@@ -76,7 +67,12 @@ public class Commit implements RepoComponent {
   }
 
   @Override
-  public List<RepoComponent> getCommits() {
+  public Commit getCommit() {
+    return this;
+  }
+
+  @Override
+  public String getBName() {
     return null;
   }
 }
