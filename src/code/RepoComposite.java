@@ -42,30 +42,28 @@ public class RepoComposite implements RepoComponent {
   @Override
   public void addCommit(RepoComponent child) {
     commitList.add(child);
-    // TODO: pair relation when add newer commit (update parent & child)
+    // update relation Parent and Child
+    updateParentChild();
   }
-
-  //  @Override
-  //  public RepoComponent clonePrototype(String bName) {
-  //    // TODO: if not found branch
-  //    List<RepoComponent> list = new ArrayList<>();
-  //    // clone all child
-  //    for (RepoComponent child : commitList) {
-  //      list.add(child.getCommit());
-  //    }
-  //    // create new object to store cloned-child and return them
-  //    RepoComposite repo = new RepoComposite(bName);
-  //    repo.commitList = list;
-  //    return repo;
-  //  }
 
   @Override
   public Commit getCommit() {
-    return null;
+    return commitList.get(commitList.size() - 1).getCommit();
   }
 
   @Override
   public String getBName() {
     return this.bName;
+  }
+
+  private void updateParentChild() {
+    int index = 0;
+    for (RepoComponent child : commitList) {
+      Commit c = child.getCommit();
+      c.setCommitId(index);
+      c.setParentId("");
+      c.setChildId("");
+      index++;
+    }
   }
 }

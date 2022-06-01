@@ -8,8 +8,6 @@ public interface RepoComponent {
 
   void addCommit(RepoComponent child);
 
-  //  RepoComponent clonePrototype(String bName);
-
   Commit getCommit();
 
   String getBName();
