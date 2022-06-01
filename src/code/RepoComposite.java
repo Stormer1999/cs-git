@@ -23,6 +23,7 @@ public class RepoComposite implements RepoComponent {
     }
     List<RepoComponent> child = new ArrayList<>(commitList);
     return child.get(child.size() - 1).viewChanges();
+    // TODO: change return for Commit to access field data
   }
 
   @Override
@@ -44,19 +45,19 @@ public class RepoComposite implements RepoComponent {
     // TODO: pair relation when add newer commit (update parent & child)
   }
 
-  @Override
-  public RepoComponent clonePrototype(String bName, RepoComponent oldCommit) {
-    // TODO: if not found branch
-    List<RepoComponent> list = new ArrayList<>();
-    // clone all child
-    for (RepoComponent child : commitList) {
-      list.add(child.getCommit());
-    }
-    // create new object to store cloned-child and return them
-    RepoComposite repo = new RepoComposite(bName);
-    repo.commitList = list;
-    return repo;
-  }
+  //  @Override
+  //  public RepoComponent clonePrototype(String bName) {
+  //    // TODO: if not found branch
+  //    List<RepoComponent> list = new ArrayList<>();
+  //    // clone all child
+  //    for (RepoComponent child : commitList) {
+  //      list.add(child.getCommit());
+  //    }
+  //    // create new object to store cloned-child and return them
+  //    RepoComposite repo = new RepoComposite(bName);
+  //    repo.commitList = list;
+  //    return repo;
+  //  }
 
   @Override
   public Commit getCommit() {

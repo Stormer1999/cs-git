@@ -8,7 +8,7 @@ public interface RepoComponent {
 
   void addCommit(RepoComponent child);
 
-  RepoComponent clonePrototype(String bName, RepoComponent oldCommit);
+  //  RepoComponent clonePrototype(String bName);
 
   Commit getCommit();
 

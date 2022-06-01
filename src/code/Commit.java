@@ -56,15 +56,15 @@ public class Commit implements RepoComponent {
   @Override
   public void addCommit(RepoComponent child) {}
 
-  @Override
-  public RepoComponent clonePrototype(String bName, RepoComponent oldCommit) {
-    Commit commit = new Commit();
-    commit.commitId = commitId;
-    commit.changes = changes;
-    commit.parentId = parentId;
-    commit.childId = childId;
-    return commit;
-  }
+  //  @Override
+  //  public RepoComponent clonePrototype(String bName) {
+  //    Commit commit = new Commit();
+  //    commit.commitId = commitId;
+  //    commit.changes = changes;
+  //    commit.parentId = parentId;
+  //    commit.childId = childId;
+  //    return commit;
+  //  }
 
   @Override
   public Commit getCommit() {
@@ -74,5 +74,17 @@ public class Commit implements RepoComponent {
   @Override
   public String getBName() {
     return null;
+  }
+
+  public int getCommitId() {
+    return commitId;
+  }
+
+  public String getParentId() {
+    return parentId;
+  }
+
+  public String getChildId() {
+    return childId;
   }
 }
