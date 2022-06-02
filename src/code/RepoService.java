@@ -30,7 +30,6 @@ public class RepoService {
 
   public void addNewBranch(String oldBranch, String newBranch) throws NullPointerException {
     System.out.println("\n*** add new branch " + newBranch + " ***");
-    // find head in old branch
     try {
       // find head in old branch
       Commit oldBranchHead = repository.get(oldBranch).getCommit();
@@ -43,6 +42,12 @@ public class RepoService {
     }
   }
 
-  // TODO: update relation
-  // TODO: commit id not implement => make updateCommitId on composite
+  public void pullHead(String bName) throws NullPointerException {
+    try {
+      String str = repository.get(bName).viewChanges();
+      System.out.println("\nchanged files (head) in branch " + bName + " : " + str);
+    } catch (NullPointerException ex) {
+      System.out.println("*** error pull head failed, not found branch ***");
+    }
+  }
 }

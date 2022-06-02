@@ -45,7 +45,7 @@ public class Commit implements RepoComponent {
             + commitId
             + ", changes="
             + changes
-            + ", patentId='"
+            + ", parentId='"
             + parentId
             + '\''
             + ", childId='"
@@ -59,23 +59,6 @@ public class Commit implements RepoComponent {
   @Override
   public Commit getCommit() {
     return this;
-  }
-
-  @Override
-  public String getBName() {
-    return null;
-  }
-
-  public int getCommitId() {
-    return commitId;
-  }
-
-  public String getParentId() {
-    return parentId;
-  }
-
-  public String getChildId() {
-    return childId;
   }
 
   public void setCommitId(int commitId) {

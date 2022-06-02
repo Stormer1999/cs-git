@@ -9,6 +9,4 @@ public interface RepoComponent {
   void addCommit(RepoComponent child);
 
   Commit getCommit();
-
-  String getBName();
 }

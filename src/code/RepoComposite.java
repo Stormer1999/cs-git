@@ -12,7 +12,7 @@ public class RepoComposite implements RepoComponent {
   public RepoComposite() {}
 
   public RepoComposite(String bName) {
-    commitList = new ArrayList<>();
+    this.commitList = new ArrayList<>();
     this.bName = bName;
   }
 
@@ -23,7 +23,6 @@ public class RepoComposite implements RepoComponent {
     }
     List<RepoComponent> child = new ArrayList<>(commitList);
     return child.get(child.size() - 1).viewChanges();
-    // TODO: change return for Commit to access field data
   }
 
   @Override
@@ -51,18 +50,23 @@ public class RepoComposite implements RepoComponent {
     return commitList.get(commitList.size() - 1).getCommit();
   }
 
-  @Override
-  public String getBName() {
-    return this.bName;
-  }
-
   private void updateParentChild() {
-    int index = 0;
+    int index = 1;
     for (RepoComponent child : commitList) {
+
       Commit c = child.getCommit();
       c.setCommitId(index);
-      c.setParentId("");
-      c.setChildId("");
+      if (index != 1 && index == commitList.size()) {
+        // head -> last id have no child
+        c.setParentId(String.valueOf((index - 1)));
+      } else if (index != 1 && commitList.size() > 1) {
+        c.setParentId(String.valueOf((index - 1)));
+        c.setChildId(String.valueOf((index + 1)));
+
+      } else if (index == 1 && index != commitList.size()) {
+        // tail -> first id have no parent
+        c.setChildId(String.valueOf((index + 1)));
+      }
       index++;
     }
   }

@@ -1,7 +1,6 @@
 package code;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -14,10 +13,9 @@ public class Main {
     changes.add("welcome.java");
 
     List<String> changes2 = new ArrayList<>();
-    changes2.add("hello.java");
-    changes2.add("hi.java");
+    changes2.add("index.html");
+    changes2.add("student.java");
 
-    System.out.println("### manipulate ###");
     RepoService service = new RepoService();
 
     // add commit to master
@@ -33,5 +31,7 @@ public class Main {
     service.addNewCommit("master", changes2);
     service.addNewCommit("master", changes2);
     service.printAllHead();
+    // get head by branch name
+    service.pullHead("dev");
   }
 }
