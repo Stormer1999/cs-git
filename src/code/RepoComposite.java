@@ -55,7 +55,7 @@ public class RepoComposite implements RepoComponent {
     for (RepoComponent child : commitList) {
 
       Commit c = child.getCommit();
-      c.setCommitId(index);
+      c.setCommitId(String.valueOf(index));
       if (index != 1 && index == commitList.size()) {
         // head -> last id have no child
         c.setParentId(String.valueOf((index - 1)));

@@ -17,7 +17,7 @@ public class RepoService {
   public void addNewCommit(String bName, List<String> changes) {
     System.out.println("\n*** add commit to branch " + bName + " ***");
     if (repository.get(bName) != null) {
-      repository.get(bName).addCommit(new Commit(0, changes, null, null));
+      repository.get(bName).addCommit(new Commit(null, changes, null, null));
     } else {
       System.out.println("*** error not found branch: add failed ***");
     }

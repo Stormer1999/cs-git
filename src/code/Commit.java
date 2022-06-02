@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Commit implements RepoComponent {
 
-  private int commitId;
+  private String commitId;
 
   private List<String> changes;
 
@@ -14,7 +14,7 @@ public class Commit implements RepoComponent {
 
   public Commit() {}
 
-  public Commit(int commitId, List<String> changes, String parentId, String childId) {
+  public Commit(String commitId, List<String> changes, String parentId, String childId) {
     this.commitId = commitId;
     this.changes = changes;
     this.parentId = parentId;
@@ -61,7 +61,7 @@ public class Commit implements RepoComponent {
     return this;
   }
 
-  public void setCommitId(int commitId) {
+  public void setCommitId(String commitId) {
     this.commitId = commitId;
   }
 
